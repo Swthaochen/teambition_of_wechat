@@ -52,7 +52,7 @@
                     <p slot="footer">点击添加图片</p> 
                 </i-cell>
                 <i-cell class="test">
-                    <img class="pic" v-if="imgUrl" :src="imgUrl+'11.jpg'" @click="show"/>
+                    <img class="pic" v-if="imgUrl" :src="imgUrl+'11.jpg'"/>
                 </i-cell>
             </i-cell-group>
         </div>

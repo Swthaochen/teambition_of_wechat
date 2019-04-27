@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/createProject/main",
-    "pages/createWork/main",
+    "pages/states/main",
     "pages/workDetail/main",
+    "pages/createWork/main",
+    "pages/createProject/main",
     "pages/myProject/main",
     "pages/index/main",
     "pages/logs/main",
