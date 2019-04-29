@@ -78,26 +78,32 @@ export default {
     } 
     &-content{
         margin-top: 20rpx;
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
         &-none{
             padding:10rpx 0;
             font-size: 30rpx;
+            margin-left: 20rpx;
         }
         &-title{
             font-size: 35rpx;
-            font-weight: bolder
+            font-weight: bolder;
+            margin-bottom: 20rpx;
         }
         &-num{
             margin-left: 30rpx;
         }
         &-box{
             width: 450rpx;
-            height: 120rpx;
+            height: 140rpx;
             border: 1rpx solid black;
             font-size: 32rpx;
-            line-height: 120rpx;
+            line-height: 150rpx;
             text-align: center;
             border-radius: 10rpx;
             margin-top: 18rpx;
+            margin-left: 20rpx;
             padding: 0 30rpx;
             box-sizing: border-box;
             position: relative;
@@ -118,6 +124,7 @@ export default {
             border: 1rpx solid black;
             border-radius: 10rpx;
             margin-top: 18rpx;
+            margin-left: 20rpx;
             display: flex;
             justify-content: center;
             align-items: center;

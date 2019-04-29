@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/sendImg/main",
     "pages/states/main",
     "pages/workDetail/main",
     "pages/createWork/main",
