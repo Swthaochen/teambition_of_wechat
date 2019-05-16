@@ -12,11 +12,11 @@
                 <img :src="imgUrl + 'liked.png'"/>
                 <span>我的关注</span>
             </div>
-            <div class="sidebar-middle-menu" @click="jumpMySe">
+            <div class="sidebar-middle-menu" @click="jumpMySe('create')">
                 <img :src="imgUrl + 'create.png'"/>
                 <span>我的创建</span>
             </div>
-            <div class="sidebar-middle-menu" @click="jumpMySe">
+            <div class="sidebar-middle-menu" @click="jumpMySe('join')">
                 <img :src="imgUrl + 'join.png'"/>
                 <span>我参与的</span>
             </div>
@@ -28,6 +28,7 @@
     </div>
 </template>
 <script>
+import {jumpTo, switchTab} from '@/utils/wxFunc'
 export default {
     data(){
         return{
@@ -35,6 +36,20 @@ export default {
         }
     },
     methods:{
+        jumpMySe(e){
+            this.$emit('closeSide')
+            if(e == 'create'){
+                let page = 'create';
+                jumpTo(`../myProject/main?page=${page}`)
+            }if(e == 'join'){
+                let page = 'join';
+                jumpTo(`../myProject/main?page=${page}`)
+            }
+        },
+        jumpMy(){
+            this.$emit('closeSide')
+            switchTab('../index/main')
+        }
     },
 }
 </script>

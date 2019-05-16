@@ -1,0 +1,63 @@
+[
+    {
+
+        "moban":
+        [
+            {
+                "stateName":"项目筹划"
+            },
+            {
+                "stateName":"项目设计"
+            },
+            {
+                "stateName":"项目研发"
+            },
+            {
+                "stateName":"测试"
+            },
+            {
+                "stateName":"发布"
+            }
+        ]
+    },
+    {
+        "moban":
+        [
+            {
+                "stateName":"产品需求"
+            },
+            {
+                "stateName":"产品分析"
+            },
+            {
+                "stateName":"产品构建"
+            },
+            {
+                "stateName":"发布"
+            }
+        ]
+    },
+    {
+        
+    "moban":
+    [
+        {
+            "stateName":"项目计划"
+        },
+        {
+            "stateName":"项目实施"
+        },
+        {
+            "stateName":"项目调整"
+        },
+        {
+            "stateName":"项目测试"
+        },
+        {
+            "stateName":"项目发布"
+        }
+    ]
+
+    }
+
+]

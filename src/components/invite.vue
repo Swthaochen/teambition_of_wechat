@@ -5,9 +5,9 @@
             <div class="invite-content-title">
                 从项目中邀请成员
             </div>
-            <peoplelist></peoplelist>
+            <peoplelist ref="mychild" @submitList="submitList" :part="part"></peoplelist>
             <div class="invite-content-bottom">
-                <span>已选2人</span>
+                <span>已选{{part.length}}人</span>
                 <span>全选</span>
             </div>
         </div>
@@ -19,6 +19,7 @@
 <script>
 import peoplelist from '@/components/peoplelist'
 export default {
+    props:["part"],
     data(){
         return {
             tabss:'tab1',
@@ -36,12 +37,19 @@ export default {
                 this.tabss = 'tab2'
             console.log(this.tabss)
             this.showFirst = !this.showFirst
+        },
+        handleClick(){
+            this.$refs.mychild.parentHandleclick();
+        },
+        submitList(e){
+            this.$emit('submitList',e)
         }
     }
 }
 </script>
 <style lang="scss" scoped>
 .invite{
+    z-index: 999;
     padding: 10rpx 20rpx;
     position: relative;
     &-title{

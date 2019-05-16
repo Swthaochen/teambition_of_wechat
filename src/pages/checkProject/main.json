@@ -8,7 +8,5 @@
     "i-button": "../../../static/iview/button/index",
     "i-modal": "../../../static/iview/modal/index",
     "i-tabs": "../../../static/iview/tabs/index",
-    "i-tab": "../../../static/iview/tab/index",
-    "i-checkbox-group": "../../../static/iview/checkbox-group/index",
-    "i-checkbox": "../../../static/iview/checkbox/index"
+    "i-tab": "../../../static/iview/tab/index"
 }}

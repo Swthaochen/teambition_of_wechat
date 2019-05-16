@@ -1,74 +1,52 @@
 <template>
     <div class="work">
-        <div class="work-title">创建任务</div>
+        <div class="work-title">查看任务</div>
         <div class="work-content">
             <i-cell-group>
-                <i-cell title="项目名称">
-                    <i-icon slot="icon" type="activity" size="26"/>
-                    <p slot="footer">{{pname}}</p>
-                </i-cell>
                 <i-cell title="状态">
                     <i-icon slot="icon" type="createtask" size="26"/>
                     <p slot="footer">{{sname}}</p>
                 </i-cell>
                 <i-cell title="任务名称">
                     <i-icon slot="icon" type="accessory" size="26"/>
-                    <input slot="footer" v-model="workName" placeholder="请输入任务名称"/>
+                    <input slot="footer" v-model="workName" placeholder="请输入任务名称" disabled/>
                 </i-cell>
-                <picker
-                    mode="date"
-                    :value="date"
-                    start="2019-01-01"
-                    end="2023-12-31"
-                    @change="bindDateChange"
-                >
-                    <i-cell title="设置截止时间" class="aaa">
-                        <view class="inner"></view>
-                        <view slot="footer" class="picker">{{date == "" ? '请选择' : date}}</view>
-                        <i-icon slot="icon" type="clock" size="26"/>
-                    </i-cell>
-                </picker>
+                <i-cell title="设置截止时间" class="aaa">
+                    <view class="inner"></view>
+                    <view slot="footer" class="picker">{{date}}</view>
+                    <i-icon slot="icon" type="clock" size="26"/>
+                </i-cell>
                 <i-cell title="备注">
                     <i-icon slot="icon" type="barrage" size="26"/>
                 </i-cell>
                 <i-cell>
-                    <textarea v-show="!showSide" v-model="remark" class="add" placeholder="请填写项目备注"></textarea> 
+                    <textarea v-show="!showSide" v-model="remark" class="add" placeholder="请填写项目备注" disabled></textarea> 
                 </i-cell>
                 <i-cell title="参与者">
-                    <p slot="footer">请添加项目参与者</p>
                     <i-icon slot="icon" type="addressbook" size="26"/>
                 </i-cell>
                 <i-cell>
                     <div class="avater">
-                        <div class="avater-area" v-for="element in part" :key="element.userName" >
-                            <img class="addpng" :src="element.avatar" @click="show"/>
-                            <span>{{element.userName}}</span>
+                        <div class="avater-area" v-for="element in part" :key="element" >
+                            <i-avatar size="large" shape="square">{{element.substr(0,1)}}</i-avatar>
+                            <span>{{element}}</span>
                         </div>
-                        <img class="addpng" v-if="imgUrl" :src="imgUrl+'add.png'" @click="show"/>
                     </div>
                 </i-cell>
             </i-cell-group>
         </div>
         <div class="work-bnt">
-            <i-button class="aaa" @click="handleClick" type="info" shape="circle" size="large">发 布 任 务</i-button>
-        </div>
-        <div class="toast" v-if="showSide">
-            <div class="toast-back change-color" @click="hide"></div>
-            <div class="toast-menu animation-up">
-                <invite :part="part" @submitList="submitList"></invite>
-            </div>
+            <i-button class="aaa" v-if="isPart && done == 'N'" @click="handleClick" type="info" shape="circle" size="large">确 认 完 成</i-button>
         </div>
     </div>
 </template>
 <script>
-import invite from '@/components/invite'
-import {createWork} from '@/utils/API'
+import {getWork, configFinish} from '@/utils/API'
 import {showToast, showModal} from '@/utils/wxFunc'
 export default {
     data(){
         return{
             imgUrl: this.GLOBAL.localImg,
-            showSide: true,
             workName:'',
             remark:'',
             part:'',
@@ -76,57 +54,51 @@ export default {
             sname:'',
             sid:'',
             pname:'',
-            pid:''
+            pid:'',
+            id:'',
+            done:''
         }
     },
-    components:{
-        invite
+    async onLoad(options){
+        let {id,name,done} = options;
+        this.id = id;
+        this.name = name;
+        this.done = done;
+        let info = await getWork(id).catch((err)=>{
+            throw new Error('fail')
+            console.log("请登录 ")
+        })
+        let {stateName, remark, executor,endtime} = info.data
+        this.sname = stateName
+        this.remark = remark
+        this.part = executor;
+        this.date = endtime;
+        this.workName = name;
     },
-    onLoad(options){
-        let {sname,sid,pname,pid} = options;
-        this.sname = sname
-        this.sid =  sid;
-        this.pid = pid;
-        this.pname = pname;
+    async onShow(){
+        let info = await getWork(this.id).catch((err)=>{
+            throw new Error('fail')
+            console.log("请登录 ")
+        })
+        let {stateName, remark, executor,endtime} = info.data
+        this.sname = stateName
+        this.remark = remark
+        this.part = executor;
+        this.date = endtime;
+        this.workName = name;
     },
     methods:{
-        hide(){
-        this.showSide = false
-        },
-        show() {
-        this.showSide = true;
-        },
-        aa(){
-            console.log('ppp')
-        },
-        submitList(e){
-            this.part = e
-        },
         async handleClick(){
-            let participant = [];
-            if(this.workName == "" || this.date == "" || this.part.length == 0){
+            await configFinish(this.id).catch((err)=>{
                 throw new Error('fail')
                 console.log("请登录 ")
-            }
-            this.part.forEach((element)=>{
-                participant.push(element.openid)
             })
-            let params = {
-                stateid:this.sid,
-                workname:this.workName,
-                endtime:this.date + " 00:00:00",
-                remark:this.remark,
-                participant:participant
-            }
-            console.log(params)
-            await createWork(params).catch((err)=>{
-                console.log(err);
-                throw new Error('fail')
-            })
-            showToast('任务创建成功！')
-        },
-        bindDateChange(e){
-           this.date = e.mp.detail.value
+        }
+    },
+    computed:{
+        isPart(){
+            
+            return this.part.indexOf(this.$store.state.userInfo.truename) != -1
         }
     }
 }

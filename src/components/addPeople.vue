@@ -12,16 +12,10 @@
                     </div>
                     <img v-if="imgUrl" :src="imgUrl+'send.png'"/>
                 </li>
-                <li class="add-area-item">
+                <li class="add-area-item" v-for="element in list" :key="element.openid">
                     <div class="add-area-item-left">
-                        <img  v-if="imgUrl" :src="imgUrl+'add.png'"/>
-                        <p>成员一</p>
-                    </div>
-                </li>
-                <li class="add-area-item">
-                    <div class="add-area-item-left">
-                        <img  v-if="imgUrl" :src="imgUrl+'add.png'"/>
-                        <p>成员一</p>
+                        <img  v-if="imgUrl" :src="element.avatar"/>
+                        <p>{{element.userName}}</p>
                     </div>
                 </li>
             </ul>
@@ -29,23 +23,33 @@
     </div>
 </template>
 <script>
+import {checkPeo} from '@/utils/API'
 export default {
+    props:["id"],
     data(){
         return {
              imgUrl: this.GLOBAL.localImg,
+             list:''
         }
+    },
+    async mounted(){
+        let list = await checkPeo(this.id).catch((err)=>{
+            console.log(err);
+            throw new Error('fail')
+        })
+        console.log(list)
+        this.list = list.data.data
     }
 }
 </script>
 <style lang="scss" scoped>
 .add{
-    height: 1130rpx;
-    width: 60vw;
-    position: absolute;
-    bottom: 0;
+    height: 100vh;
+    width: 55vw;
+    position: fixed;
+    top: -608rpx;
     right: 0;
     background: white;
-    border: 1rpx black solid;
     &-title{
         width: 100%;
         height: 100rpx;
@@ -72,8 +76,9 @@ export default {
                 font-size: 34rpx;
                 img{
                     margin-right: 20rpx;
-                    height: 70rpx;
-                    width: 70rpx;
+                    height: 80rpx;
+                    width: 80rpx;
+                    border-radius: 50%;
                 }
             }
         }

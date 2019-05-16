@@ -9,6 +9,6 @@
     "i-modal": "../../../static/iview/modal/index",
     "i-tabs": "../../../static/iview/tabs/index",
     "i-tab": "../../../static/iview/tab/index",
-    "i-checkbox-group": "../../../static/iview/checkbox-group/index",
-    "i-checkbox": "../../../static/iview/checkbox/index"
+    "i-tag": "../../static/iview/tag/index",
+    "i-notice-bar": "../../../static/iview/notice-bar/index"
 }}

@@ -15,7 +15,7 @@
             </div>
             <div class="img-content-peo">
                 <span>公告发布人</span>
-                <span>历史老师</span>
+                <span>啦啦啦</span>
             </div>
         </div>
         <div class="bnt">
@@ -34,7 +34,7 @@ export default {
 </script>
 <style>
 page{
-    background: #eeeeee;
+    /* background: #eeeeee; */
 }
 </style>
 
@@ -52,7 +52,7 @@ page{
     &-title{
         margin: 0 auto;
         text-align: center;
-        font-size: 42rpx;
+        font-size: 46rpx;
         font-weight: bolder;
     }
     &-content{
@@ -87,6 +87,8 @@ page{
             height: 120rpx;
             align-items: center;
             margin-top: 20rpx;
+            box-sizing: border-box;
+            padding-right: 16rpx;
         }
     }
 }

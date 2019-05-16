@@ -8,22 +8,22 @@
                 <div class="model-area-content-check">
                     <ul>
                         <li class="model-area-content-check-list">
-                            <div>
-                                <i-icon type="success_fill" size="28" color="#80848f" />
+                            <div @click="initNum = 0">
+                                <i-icon :type="initNum === 0 ? 'success_fill' : 'success'" size="28" color="#2db7f5" />
                                 <p>模板一</p>
                             </div>
                             <span>查看详情</span>
                         </li>
                         <li class="model-area-content-check-list">
-                            <div>
-                                <i-icon type="success" size="28" color="#80848f" />
+                            <div @click="initNum = 1">
+                                <i-icon :type="initNum == 1 ? 'success_fill' : 'success'" size="28" color="#2db7f5" />
                                 <p>模板二</p>
                             </div>
                             <span>查看详情</span>
                         </li>
                         <li class="model-area-content-check-list">
-                            <div>
-                                <i-icon type="success" size="28" color="#80848f" />
+                            <div @click="initNum = 2">
+                                <i-icon :type="initNum == 2 ? 'success_fill' : 'success'" size="28" color="#2db7f5" />
                                 <p>模板三</p>
                             </div>
                             <span>查看详情</span>
@@ -36,11 +36,25 @@
     </div>
 </template>
 <script>
+const initList = require('../utils/data.json') 
 export default {
+    props:["initNum"],
+    data(){
+        return{
+            
+        }
+    },
     methods:{
         aa(){
             console.log('ppp')
+        },
+        handleClick(){
+            console.log(this.initNum)
+            this.$emit('submitMy',initList[this.initNum].moban,this.initNum)
         }
+    },
+    mounted(){
+        console.log(initList)
     }
 }
 </script>
@@ -75,7 +89,7 @@ export default {
                         margin-left: 5rpx;
                     }
                     span{
-                        color: #A8A8A8;
+                        color: #2db7f5;
                     }
                 }
                 li:last-child{

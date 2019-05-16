@@ -1,16 +1,22 @@
 {
   "pages": [
-    "pages/sendImg/main",
+    "pages/welcome/main",
+    "pages/rush/main",
+    "pages/checkWork/main",
+    "pages/checkProject/main",
     "pages/states/main",
-    "pages/workDetail/main",
-    "pages/createWork/main",
     "pages/createProject/main",
+    "pages/createWork/main",
     "pages/myProject/main",
     "pages/index/main",
+    "pages/recieve/main",
+    "pages/workDetail/main",
+    "pages/resign/main",
+    "pages/sendImg/main",
     "pages/logs/main",
     "pages/counter/main"
   ],
-  "window": {
+  "window": { 
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
@@ -29,7 +35,7 @@
       "selectedIconPath": "static/tabs/home-active.png"
     }, {
       "text": "我的",
-      "pagePath": "pages/logs/main",
+      "pagePath": "pages/recieve/main",
       "iconPath": "static/tabs/orders.png",
       "selectedIconPath": "static/tabs/orders-active.png"
     }],
@@ -41,7 +47,7 @@
       "activeIcon": "static/tabs/home-active.png"
     }, {
       "name": "我的",
-      "pagePath": "pages/logs/main",
+      "pagePath": "pages/recieve/main",
       "icon": "static/tabs/orders.png",
       "activeIcon": "static/tabs/orders-active.png"
     }],

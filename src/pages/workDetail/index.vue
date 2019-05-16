@@ -1,6 +1,10 @@
 <template>
     <div class="work">
-        <div class="work-title">项目的可行性分析报告</div>
+        <div class="work-title">
+            <div class="lt"></div>
+            <div class="rb"></div>
+            项目的可行性分析报告
+        </div>
         <div class="work-content">
         <i-notice-bar icon="systemprompt" loop speed="900">
             您暂时没有领取该任务哦，快快领取吧！！
@@ -59,6 +63,41 @@ export default {
     &-title{
         font-size: 42rpx;
         font-weight: 900;
+        position: relative;
+        display: inline-block;
+        padding: 14rpx 30rpx;
+        div{
+            height:15rpx;
+            width: 28rpx;
+        }
+        .lt{
+            position: absolute;
+            border-top: 3px solid #00d3e7;
+            border-left: 3px solid #00d3e7;
+            left: -2px;
+            top: -2px;
+        }
+        .rt{
+            position: absolute;
+            border-top: 3px solid #00d3e7;
+            border-right: 3px solid #00d3e7;
+            right: -2px;
+            top: -2px;
+        }
+        .rb{
+            position: absolute;
+            border-bottom:3px solid #00d3e7;
+            border-right: 3px solid #00d3e7;
+            right: -2px;
+            bottom: -2px;
+        }
+        .lb{
+            position: absolute;
+            border-bottom:3px solid #00d3e7;
+            border-left: 3px solid #00d3e7;
+            left: -2px;
+            bottom: -2px;
+        }
     }
     &-content{
         padding: 0rpx 25rpx;

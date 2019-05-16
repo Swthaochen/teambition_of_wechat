@@ -4,7 +4,7 @@
     <div class="project-title">
       <div class="lt"></div>
       <div class="rb"></div>
-      我参与的
+      回收站
       </div>
     <div class="project-content">
         <img-list v-for="element in list" :key="element.projectId" :url="element.imgUrl" :projectName="element.projectName" :projectId="element.projectId" :element="element" @newList="newList"></img-list>
@@ -20,7 +20,7 @@
 <script>
 import imgList from '@/components/img-list'
 import siderbar from '@/components/siderbar'
-import {getHome} from '@/utils/API'
+import {getRushList} from '@/utils/API'
 export default {
   data(){
     return {
@@ -55,16 +55,11 @@ export default {
     }
   },
   async onLoad(options){
-    let res = await getHome().catch((err)=>{
+    let res = await getRushList().catch((err)=>{
       console.log(err);
       throw new Error('fail')
     });
-    if(options.page == 'create'){
-      this.list = res.data.create
-    }
-    if(options.page == 'join'){
-      this.list = res.data.follow
-    }
+    console.log(res)
   }
 }
 </script>

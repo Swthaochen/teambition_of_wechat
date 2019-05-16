@@ -1,13 +1,14 @@
 <template>
     <div class="initmodel">
         <div class="initmodel-title">为项目制定步骤规划命脉</div>
+        <img class="close" v-if="imgUrl" :src="imgUrl+'shut-down.png'"/>
         <i-tabs :current=" tabss " @change="changeBar">
             <i-tab key="tab1" title="默认模板"></i-tab>
             <i-tab key="tab2" title="自定义模板"></i-tab>
         </i-tabs>
         <div>
-            <model v-if="!showFirst"></model>
-            <my-model v-else></my-model>
+            <model v-if="!showFirst" @submitMy="submit" :initNum="initNum"></model>
+            <my-model v-else @submitMy="submit"></my-model>
         </div>
     </div>
 </template>
@@ -15,8 +16,10 @@
 import model from '@/components/model'
 import myModel from '@/components/my-model'
 export default {
+    props:["states","initNum"],
     data(){
         return {
+            imgUrl: this.GLOBAL.localImg,
             tabss:'tab1',
             showFirst:false,
         }
@@ -33,6 +36,9 @@ export default {
                 this.tabss = 'tab2'
             console.log(this.tabss)
             this.showFirst = !this.showFirst
+        },
+        submit(msg,num){
+            this.$emit('submitList',msg,num)
         }
     }
 }
@@ -41,6 +47,13 @@ export default {
 .initmodel{
     padding: 10rpx;
     position: relative;
+    .close{
+        position: absolute;
+        right: 10rpx;
+        top: 10rpx;
+        height: 40rpx;
+        width: 40rpx;
+    }
     &-title{
         padding: 15rpx 15rpx 15rpx 0;
         margin-left: 15rpx;
